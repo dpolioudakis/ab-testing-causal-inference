@@ -21,11 +21,11 @@ Learn and demonstrate core tech data science experimentation skills through end-
 **Primary text:** Kohavi, Tang, Xu — *Trustworthy Online Controlled Experiments: A Practical Guide to A/B Testing* (2020)
 
 Section-aligned reading guide:
-- Sections 1–2 (SQL, hypothesis testing): Chapters 1–3, 17 (metrics taxonomy, hypothesis testing fundamentals, OEC definition)
-- Section 3 (power analysis): Chapter 15 (sample size, power, minimum detectable effect)
-- Section 4 (segmentation): Chapter 20 (heterogeneous treatment effects), Chapter 19 (pitfalls of multiple testing)
-- Section 5 (CUPED): Chapter 22 (variance reduction techniques)
-- Section 6 (causal inference): Not covered in Kohavi — use Coursera causal inference course materials
+- Sections 1–2 (SQL, hypothesis testing): Chapters 1–3 (intro, end-to-end example, trustworthiness), Chapter 6–7 (organizational metrics, OEC), Chapter 17 (statistics behind experiments: t-tests, p-values, power, multiple testing)
+- Section 3 (power analysis): Chapter 17 (Type I/II errors and power section), Chapter 21 (Sample Ratio Mismatch)
+- Section 4 (segmentation): Chapter 3 (segment differences, Simpson's paradox), Chapter 17 (multiple testing section)
+- Section 5 (CUPED): Chapter 18 (variance estimation and improved sensitivity — this is the CUPED chapter)
+- Section 6 (causal inference): Chapter 11 (observational causal studies) + Coursera causal inference course materials
 
 ## Timeline
 
