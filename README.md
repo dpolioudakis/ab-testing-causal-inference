@@ -14,8 +14,8 @@ End-to-end analysis of an email marketing experiment, a three-arm RCT with 64,00
 | Women's Email vs Control | +4.5pp*** | +0.31pp*** | +$0.42*** |
 | Men's vs Women's Email | +3.1pp*** | +0.37pp*** | +$0.35* |
 
-*p < 0.05, ***p < 0.001 after Benjamini-Hochberg correction across 9 tests.
-pp = percentage points
+- *p < 0.05, ***p < 0.001 after Benjamini-Hochberg correction across 9 tests.
+- pp = percentage points
 
 **Per 10,000 customers, the Men's email is expected to generate:**
 - 766 additional visits (95% CI: 700–832)
