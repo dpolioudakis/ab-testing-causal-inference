@@ -87,3 +87,23 @@ Run in numbered order. Each notebook loads the raw data independently.
 | `04_segmentation.ipynb` | Estimates treatment effects within segments defined by recency, channel, prior spend, and customer tenure. Tests for interaction effects via OLS regression with BH correction. |
 | `05_cuped.ipynb` | Implements CUPED from scratch using single and multiple covariates, quantifies variance reduction, and explains why the available covariates produced minimal improvement. |
 | `06_causal_inference.ipynb` | **(in progress)** Uses the experimental ground truth to validate propensity score methods on an artificially biased observational dataset.
+
+---
+
+## Design Decisions
+
+**Dataset choice:** The Hillstrom dataset was chosen for having three treatment arms, individual-level pre-experiment covariates, and multiple outcome types (binary and continuous) — a combination that supports the full experimentation workflow, including multi-arm comparisons, segmentation, CUPED, and realistic distributional challenges like zero-inflated spend.
+
+**Segmentation scope:** Downstream analysis focuses on the Men's email vs. Control comparison. The Men's email produced the largest spend lift, and limiting to one pairwise comparison reduces the number of interaction tests and the associated multiple testing burden.
+
+**CUPED covariate selection:** All pre-experiment covariates were evaluated by regressing each outcome on each covariate and comparing R². History and recency had the highest predictive power overall and were used for CUPED adjustment. With R² values under 0.006 across all covariate-outcome pairs, poor variance reduction was expected — and confirmed, with under 1% reduction across all outcomes.
+
+---
+
+## Limitations
+
+- **Short tracking window:** Outcomes were measured over two weeks. Delayed effects - customers who see the email and purchase a month later would not be captured, likely understating the true campaign impact.
+
+- **Correlated outcomes:** Visit, conversion, and spend are hierarchically related, which weakens the independence assumption of the BH correction. In practice, a single primary metric (the OEC) would be designated upfront - spend in this case, with visit and conversion reported as secondary diagnostics.
+
+- **Selected population:** The experiment covers customers who purchased within the past 12 months. Results may not generalize to lapsed customers or new customer acquisition campaigns.
