@@ -22,9 +22,13 @@ End-to-end analysis of an email marketing experiment, a three-arm RCT with 64,00
 - 68 additional conversions (95% CI: 50–86)
 - $7,698 additional spend (95% CI: $4,851–$10,545)
 
-**Segmentation:** The campaign effect was consistent across all segments tested: No statistically significant heterogeneous treatment effects were found after multiple comparisons correction.
+![Segmentation forest plot — spend by customer segment](reports/figures/forest_plot_spend.png)
+
+**Segmentation:** The campaign effect was consistent across all customer segments. Interaction tests found no significant heterogeneity after multiple comparisons correction.
 
 **CUPED:** Variance reduction was under 1% for all outcomes, consistent with the weak correlations between the available covariates (`history`, `recency`) and outcomes.
+
+**Causal inference:** Selection bias was introduced into the experimental data to simulate observational conditions. After introducing selection bias, naive analysis overstated the spend effect by 28%. IPW and doubly robust estimation recovered it to within 6% of the experimental ground truth.
 
 ---
 
@@ -86,17 +90,17 @@ Run in numbered order. Each notebook loads the raw data independently.
 | `03_power_analysis.ipynb` | Computes minimum detectable effects at the observed sample size, plots power and sample size curves, and discusses the effect of winsorization on power for the spend outcome. |
 | `04_segmentation.ipynb` | Estimates treatment effects within segments defined by recency, channel, prior spend, and customer tenure. Tests for interaction effects via OLS regression with BH correction. |
 | `05_cuped.ipynb` | Implements CUPED from scratch using single and multiple covariates, quantifies variance reduction, and explains why the available covariates produced minimal improvement. |
-| `06_causal_inference.ipynb` | **(in progress)** Uses the experimental ground truth to validate propensity score methods on an artificially biased observational dataset.
+| `06_causal_inference.ipynb` | Uses the experimental ground truth to validate propensity score methods on an artificially biased observational dataset.
 
 ---
 
 ## Design Decisions
 
-**Dataset choice:** The Hillstrom dataset was chosen for having three treatment arms, individual-level pre-experiment covariates, and multiple outcome types (binary and continuous) — a combination that supports the full experimentation workflow, including multi-arm comparisons, segmentation, CUPED, and realistic distributional challenges like zero-inflated spend.
+**Dataset choice:** The Hillstrom dataset was chosen for having three treatment arms, individual-level pre-experiment covariates, and multiple outcome types (binary and continuous) - a combination that supports the full experimentation workflow, including multi-arm comparisons, segmentation, CUPED, and realistic distributional challenges like zero-inflated spend.
 
 **Segmentation scope:** Downstream analysis focuses on the Men's email vs. Control comparison. The Men's email produced the largest spend lift, and limiting to one pairwise comparison reduces the number of interaction tests and the associated multiple testing burden.
 
-**CUPED covariate selection:** All pre-experiment covariates were evaluated by regressing each outcome on each covariate and comparing R². History and recency had the highest predictive power overall and were used for CUPED adjustment. With R² values under 0.006 across all covariate-outcome pairs, poor variance reduction was expected — and confirmed, with under 1% reduction across all outcomes.
+**CUPED covariate selection:** All pre-experiment covariates were evaluated by regressing each outcome on each covariate and comparing R². History and recency had the highest predictive power overall and were used for CUPED adjustment. With R² values under 0.006 across all covariate-outcome pairs, poor variance reduction was expected - and confirmed, with under 1% reduction across all outcomes.
 
 ---
 
